@@ -160,14 +160,17 @@ int main(int argc, char *argv[])
             stack_a = stack_creator(data->arg);
             sorted = sort_args(data->arg, data->count);
             check_if_sorted(sorted, &stack_a, data->count);
-            ft_sort(&stack_a, &stack_b,  sorted, data->count);
+            ft_get_index(stack_a, sorted, data->count);
+            ft_sort(&stack_a, &stack_b, data->count);
+           
     //         ft_get_index(stack_a, sorted, data->count);
-
+           // printf("the index: %d\nthe number: %d\n", stack_a->index,stack_a->nb);
             while(stack_a)
             {
                 printf("-Stack A :[%d]\n", stack_a->nb);
                 stack_a = stack_a->next;
             }
+            printf("\n========================\n");
             while(stack_b)
             {
                 printf("-Stack B :[%d]\n", stack_b->nb);

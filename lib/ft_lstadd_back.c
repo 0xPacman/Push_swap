@@ -12,17 +12,17 @@
 
 #include "../push_swap.h"
 
-void	ft_lstadd_back(t_list **lst, t_list *new)
+void	ft_lstadd_back(t_list **lst, t_list *newlst)
 {
 	t_list	*head;
 
 	if (!*lst)
-		*lst = new;
+		*lst = newlst;
 	else
 	{
 		head = *lst;
 		while (head->next)
 			head = head->next;
-		head->next = new;
+		head->next = newlst;
 	}
 }

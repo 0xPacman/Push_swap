@@ -12,7 +12,7 @@
 
 #include "../push_swap.h"
 
-t_list *find_min(t_list **stack)
+t_list *ft_find_min(t_list **stack)
 {
     t_list *min;
     t_list *lst;
@@ -27,7 +27,7 @@ t_list *find_min(t_list **stack)
     }
     return (min);
 }
-t_list *find_max(t_list **stack)
+t_list *ft_find_max(t_list **stack)
 {
     t_list *max;
     t_list *lst;
@@ -42,12 +42,12 @@ t_list *find_max(t_list **stack)
     }
     return (max);
 }
-int find_in_stack(t_list **stack, t_list *to_find)
+int ft_find_in_stack(t_list **stack, t_list *to_find)
 {
     t_list *lst;
     int i;
 
-    i = 1;
+    i = 0;
     lst = *stack;
     while(lst != to_find)
     {
@@ -57,7 +57,7 @@ int find_in_stack(t_list **stack, t_list *to_find)
     return (i);
 }
 
-int check_stack(t_list **stack, int n)
+int ft_check_stack(t_list **stack, int n)
 {
 	t_list *lst;
 	int size;
