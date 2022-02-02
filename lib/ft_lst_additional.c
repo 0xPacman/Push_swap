@@ -23,7 +23,7 @@ t_list *ft_find_min(t_list **stack)
     {
         if(min->nb > lst->nb)
             min = lst;
-        lst = lst -> next;
+        lst = lst->next;
     }
     return (min);
 }

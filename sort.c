@@ -203,13 +203,14 @@ void ft_sort_all(t_list **stack_a, t_list **stack_b, int n)
                     pa(stack_a, stack_b);
                 }
                 else 
-                    data->max = data->mid;
-                    data->mid = (data->max - data->min) / 2 + data->min;
-                    data->flag++;
+					rb(stack_b);
                 i++;
             }
+			data->max = data->mid;
+            data->mid = (data->max - data->min) / 2 + data->min;
+            data->flag++;
         }
-		//printf("%d\n", data->flag);
+		printf("%d\n%d\n%d\n", (*stack_a)->flag, (*stack_b)->flag,data->flag);
     }
 //    printf("%d\n", data->mid);
 }

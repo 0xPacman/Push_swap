@@ -108,7 +108,7 @@ void ft_is_valid(char *str)
     i = 0;
     while(str[i])
     {
-        if((str[i] == '-' && ft_isdigit(str[i+1])))
+        if(((str[i] == '-' || str[i] == '+')&& ft_isdigit(str[i+1])))
             i++;
         if(!ft_isdigit(str[i]))
             ft_error_handler();
