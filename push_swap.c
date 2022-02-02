@@ -102,6 +102,20 @@ char *ft_addstr(char **str)
          return (args);
 }
 
+void ft_is_valid(char *str)
+{
+    int i;
+    i = 0;
+    while(str[i])
+    {
+        if((str[i] == '-' && ft_isdigit(str[i+1])))
+            i++;
+        if(!ft_isdigit(str[i]))
+            ft_error_handler();
+        i++;
+    }
+}
+
 void ft_is_duplicate(char **str)
 {
     int i;
@@ -110,9 +124,12 @@ void ft_is_duplicate(char **str)
 
     j = 0;
     i = 0;
-    args = 1;
+    args = 0;
     while(str[args])
+    {
+        ft_is_valid(str[args]);
         args++;
+    }
     while (i < args)
         {
             j = i + 1;
@@ -165,17 +182,17 @@ int main(int argc, char *argv[])
            
     //         ft_get_index(stack_a, sorted, data->count);
            // printf("the index: %d\nthe number: %d\n", stack_a->index,stack_a->nb);
-            while(stack_a)
-            {
-                printf("-Stack A :[%d]\n", stack_a->nb);
-                stack_a = stack_a->next;
-            }
-            printf("\n========================\n");
-            while(stack_b)
-            {
-                printf("-Stack B :[%d]\n", stack_b->nb);
-                stack_b = stack_b->next;
-            }
+            // while(stack_a)
+            // {
+            //     printf("-Stack A :[%d]\n", stack_a->nb);
+            //     stack_a = stack_a->next;
+            // }
+            // printf("\n========================\n");
+            // while(stack_b)
+            // {
+            //     printf("-Stack B :[%d]\n", stack_b->nb);
+            //     stack_b = stack_b->next;
+            // }
         }
     exit(1);
 }

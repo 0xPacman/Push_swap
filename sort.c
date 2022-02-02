@@ -36,7 +36,7 @@ void ft_get_index(t_list *stack, int *sorted, int n)
 }
 void ft_sort_2(t_list **stack)
 {
-    if ((*stack)->nb > (*stack)->nb)
+    if ((*stack)->nb > (*stack)->next->nb)
         ra(stack);
 }
 
@@ -166,8 +166,8 @@ void ft_sort_all(t_list **stack_a, t_list **stack_b, int n)
     while(!ft_check_stack(stack_a, n))
     {
         //printf("1");
-        if(!*stack_b)
-        { //printf("2");
+        if(!*stack_b) //if stack b is empty
+        { //printf("flag: %d\n", (*stack_a)->flag);
             if((*stack_a)->flag == 0)
             {
                 while ((*stack_a)->flag != -42)
@@ -190,18 +190,16 @@ void ft_sort_all(t_list **stack_a, t_list **stack_b, int n)
                 data->max = ft_find_max(stack_b)->index;
             data->min = (data->max - data->min) / 2 + data->min;
         }
-        else 
+        else //if stack b is not empty
         {
             i = 0;
             while (i < ft_lstsize(stack_b) && *stack_b)
             {
                 if ((*stack_b)->index == data->min)
-                {
                     ft_sort_min(stack_a, stack_b, data);
-                }
                 else if ((*stack_b)->index >= data->mid)
                 {
-                    (*stack_b)->flag = data->flag;
+                    (*stack_b)->flag = data->flag; 
                     pa(stack_a, stack_b);
                 }
                 else 
@@ -211,6 +209,7 @@ void ft_sort_all(t_list **stack_a, t_list **stack_b, int n)
                 i++;
             }
         }
+		//printf("%d\n", data->flag);
     }
 //    printf("%d\n", data->mid);
 }
