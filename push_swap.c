@@ -30,7 +30,6 @@ t_list *stack_creator(char **str)
         ft_lstadd_back(&node, ft_lstnew(ft_atoi(str[i])));
         i++;
     }
-    //printf("linked list size:%d\n", ft_lstsize(&node));
     return (node);
 }
 
@@ -178,6 +177,11 @@ int main(int argc, char *argv[])
             sorted = sort_args(data->arg, data->count);
             check_if_sorted(sorted, &stack_a, data->count);
             ft_get_index(stack_a, sorted, data->count);
+			// while(stack_a)
+            // {
+            //     printf("-Stack A:[%d] | index %d\n", stack_a->nb, stack_a->index);
+            //     stack_a = stack_a->next;
+            // }
             ft_sort(&stack_a, &stack_b, data->count);
            
     //         ft_get_index(stack_a, sorted, data->count);

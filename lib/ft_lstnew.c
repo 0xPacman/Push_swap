@@ -24,7 +24,7 @@ t_list	*ft_lstnew(int nb)
 		 //printf("nb:%d\n", nb);
 		 new->nb = nb;
 		 new->index = 0;
-		 //new->flag = 0;
+		 new->flag = 0;
 		 new->next = NULL;
 		 //new->prev = NULL;
 	 }
