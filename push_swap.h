@@ -23,6 +23,8 @@ typedef struct s_data {
 	int count;
 } t_data;
 
+t_list 	*stack_creator(char **str);
+void	ft_is_duplicate(char **str);
 char	*ft_addstr(char **str);
 size_t  ft_strlen(const char *s);
 char	*ft_strjoin(char const *s1, char const *s2);

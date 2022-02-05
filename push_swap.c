@@ -166,6 +166,8 @@ int main(int argc, char *argv[])
     t_data *data = malloc(sizeof(t_data));
     t_list *stack_a;
     t_list *stack_b;
+    stack_a = NULL;
+    stack_b = NULL;
     int *sorted;
 
     if (argc >= 2)

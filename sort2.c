@@ -137,10 +137,11 @@ void ft_push_a(t_list **stack_a, t_list **stack_b, t_data *data)
 {
 	int i;
 	i = 0;
-    while (i < ft_lstsize(stack_b) && *stack_b)
+    int size = ft_lstsize(stack_b);
+    while (i < size && *stack_b)
     {
     	if ((*stack_b)->index == data->min)
-        	ft_sort_min(stack_a, stack_b, data);
+            ft_sort_min(stack_a, stack_b, data);
         else if ((*stack_b)->index >= data->mid)
         {
         	(*stack_b)->flag = data->flag;
@@ -149,10 +150,10 @@ void ft_push_a(t_list **stack_a, t_list **stack_b, t_data *data)
         else 
 			rb(stack_b);
         i++;
-        }
-		data->max = data->mid;
-        data->mid = (data->max - data->min) / 2 + data->min;
-        data->flag++;
+    }
+	data->max = data->mid;
+    data->mid = (data->max - data->min) / 2 + data->min;
+    data->flag++;
 }
 
 void ft_push_b(t_list **stack_a, t_list **stack_b, t_data *data)
@@ -161,23 +162,54 @@ void ft_push_b(t_list **stack_a, t_list **stack_b, t_data *data)
 	// if ((*stack_a)->flag == 2)
 	// 	exit(1);
 	int flag2 = (*stack_a)->flag;
-	while ((*stack_a)->flag == 0 && (*stack_a)->flag != -42)
-    { 
-    	if ((*stack_a)->index != data->min)
-        	pb(stack_a, stack_b);
-        ft_sort_min(stack_a, stack_b, data);
+    if ((*stack_a)->flag == 0)
+    {
+	    while ((*stack_a)->flag != -42)
+        { 
+    	    if ((*stack_a)->index != data->min)
+        	    pb(stack_a, stack_b);
+            ft_sort_min(stack_a, stack_b, data);
+        }
     }
-    while ((*stack_a)->flag != 0 && (*stack_a)->flag == flag2)
-    { 
-    	if ((*stack_a)->index != data->min)
-        	pb(stack_a, stack_b);
-        ft_sort_min(stack_a, stack_b, data);
+    else if ((*stack_a)->flag != 0)
+    {
+        while ((*stack_a)->flag == flag2)
+        { 
+    	    if ((*stack_a)->index != data->min)
+        	    pb(stack_a, stack_b);
+            ft_sort_min(stack_a, stack_b, data);
+        }
     }
     if (*stack_b)
     	data->max = ft_find_max(stack_b)->index;
     data->min = (data->max - data->min) / 2 + data->min;
 }
+void start_sorting(t_list **stack_a, t_list **stack_b, t_data *data)
+{
+    int	size;
+	int	i;
 
+	size = ft_lstsize(stack_a);
+	i = 0;
+	
+	while (i < size)
+        {
+		if ((*stack_a)->index <= data->mid)
+			pb(stack_a, stack_b);
+		else
+		{
+			if (ft_lstsize(stack_b) > 1 && (*stack_b)->index < (data->mid / 2))
+				rr(stack_a, stack_b);
+			else
+                ra(stack_a);
+		}
+        i++;
+	}
+	
+	data->max = data->mid;
+	data->mid = (data->max - data->min) / 2 + data->min;
+	data->flag++;
+}
 void ft_sort_all(t_list **stack_a, t_list **stack_b, int n)
 {
     t_data *data;
@@ -190,30 +222,7 @@ void ft_sort_all(t_list **stack_a, t_list **stack_b, int n)
     data->max = ft_find_max(stack_a)->index;
     data->mid = data->max / 2 + data->min;
     
-    int i;
-
-    i = 0;
-    while (i < ft_lstsize(stack_a))
-        {
-        if ((*stack_a)->index <= data->mid)
-            pb(stack_a, stack_b);
-        else
-            {
-            if (ft_lstsize(stack_b) > 1 && (*stack_b)->index < (data->mid/2))
-                rr(stack_a, stack_b);
-            else
-                {
-                    ra(stack_a);
-                }
-        }
-        
-        i++;
-    }
-	//printf("flag1:%d\n", (*stack_a)->flag);
-    data->max = data->mid;
-    data->mid = (data->max - data->min) / 2 + data->min;
-    data->flag++;
-   // printf("flag2:%d\n", (*stack_a)->flag);
+    start_sorting(stack_a, stack_b, data);
 	
     while(!ft_check_stack(stack_a, n))
     {
