@@ -26,6 +26,9 @@ typedef struct s_data {
 t_list 	*stack_creator(char **str);
 void	ft_is_duplicate(char **str);
 char	*ft_addstr(char **str);
+int 	*sort_args(char **str, int n);
+void 	ft_bubble_sort(int tab[], int n);
+int 	check_if_sorted(int *sorted, t_list **stack, int n);
 size_t  ft_strlen(const char *s);
 char	*ft_strjoin(char const *s1, char const *s2);
 char	**ft_split(char const *s, char c, t_data *data);
@@ -71,6 +74,18 @@ void	ft_sort_3(t_list **stack);
 void	ft_sort_4(t_list **stack_a, t_list **stack_b);
 void	ft_sort_5(t_list **stack_a, t_list **stack_b);
 void	ft_sort_all(t_list **stack_a, t_list **stack_b, int n);
+
+void verify_sa(t_list **stack);
+void verify_sb(t_list **stack);
+void verify_ss(t_list **stack_a, t_list **stack_b);
+void verify_ra(t_list **stack);
+void verify_rb(t_list **stack);
+void verify_rr(t_list **stack_a, t_list **stack_b);
+void verify_rra(t_list **stack);
+void verify_rrb(t_list **stack);
+void verify_rrr(t_list **stack_a, t_list **stack_b);
+void verify_pb(t_list **stack_a, t_list **stack_b);
+void verify_pa(t_list **stack_a, t_list **stack_b);
 
 
 #endif

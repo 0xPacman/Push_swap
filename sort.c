@@ -23,10 +23,8 @@ void ft_get_index(t_list *stack, int *sorted, int n)
         i = 0;
         while(i < n)
         {
-            //printf("nb %d - sorted %d\n", lst->nb, sorted[i]);
             if (lst->nb == sorted[i])
             {
-                //printf("nb: %d is in index:%d\n",lst->nb,i);
                 lst->index = i;
             }
             i++;
@@ -75,7 +73,6 @@ void ft_sort_4(t_list **stack_a, t_list **stack_b)
     t_list *min;
 
     min = ft_find_min(stack_a);
-    //printf("size:%d\n", ft_lstsize(stack_a));
     while (ft_lstsize(stack_a) > 3)
     {
         if (!ft_find_in_stack(stack_a, min))
@@ -85,7 +82,6 @@ void ft_sort_4(t_list **stack_a, t_list **stack_b)
         else
             rra(stack_a);
     }
-    //pb(stack_a, stack_b);
     ft_sort_3(stack_a);
     while(ft_lstsize(stack_b) > 0)
         pa(stack_a, stack_b);
@@ -96,7 +92,6 @@ void ft_sort_5(t_list **stack_a, t_list **stack_b)
     t_list *min;
 
     min = ft_find_min(stack_a);
-    //printf("size:%d\n", ft_lstsize(stack_a));
     while (ft_lstsize(stack_a) > 4)
     {
         if (!ft_find_in_stack(stack_a, min))
@@ -106,7 +101,6 @@ void ft_sort_5(t_list **stack_a, t_list **stack_b)
         else
             rra(stack_a);
     }
-    //pb(stack_a, stack_b);
     ft_sort_4(stack_a, stack_b);
     while(ft_lstsize(stack_b) > 0)
         pa(stack_a, stack_b);
@@ -121,11 +115,11 @@ void ft_sort_min(t_list **stack_a, t_list **stack_b, t_data *data)
         data->min++;
     }
     else if (ft_lstsize(stack_b) > 0 && (*stack_b)->index == data->min)
-         pa(stack_a, stack_b);
+        pa(stack_a, stack_b);
+    else if (ft_lstsize(stack_b) > 1 && (*stack_a)->next->index == data->min && ft_lstlast(*stack_a)->index == data->min + 1)
+        ss(stack_a, stack_b);
     else if (ft_lstsize(stack_b) > 2 && ft_lstlast(*stack_b)->index == data->min)
          rrb(stack_b);
-    else if (ft_lstsize(stack_b) > 1 && (*stack_a)->next->index == data->min)
-        ss(stack_a, stack_b);
     else if ((*stack_a)->next->index == data->min)
         sa(stack_a);
     else
@@ -137,96 +131,106 @@ void ft_push_a(t_list **stack_a, t_list **stack_b, t_data *data)
 {
 	int i;
 	i = 0;
-    while (i < ft_lstsize(stack_b) && *stack_b)
+    int size = ft_lstsize(stack_b);
+
+    while (i < size && *stack_b)
     {
-    	if ((*stack_b)->index == data->min)
-        	ft_sort_min(stack_a, stack_b, data);
+        if ((*stack_b)->index == data->min)
+            ft_sort_min(stack_a, stack_b, data);
         else if ((*stack_b)->index >= data->mid)
         {
         	(*stack_b)->flag = data->flag;
             pa(stack_a, stack_b);
         }
-        else 
+        else
 			rb(stack_b);
-        i++;
-        }
-		data->max = data->mid;
-        data->mid = (data->max - data->min) / 2 + data->min;
-        data->flag++;
+		i++;
+    }
+    
+    //printf("end push a\n");
+	data->max = data->mid;
+    data->mid = (data->max - data->min) / 2 + data->min;
+    data->flag++;
 }
 
 void ft_push_b(t_list **stack_a, t_list **stack_b, t_data *data)
 {
-	
-	int flag2 = (*stack_a)->flag;
-	while ((*stack_a)->flag == 0 && (*stack_a)->flag != -42)
-    { 
-    	if ((*stack_a)->index != data->min)
-        	pb(stack_a, stack_b);
-        ft_sort_min(stack_a, stack_b, data);
+	int flag2; 
+	flag2 = (*stack_a)->flag;
+    
+    if ((*stack_a)->flag == 0)
+    {
+	    while ((*stack_a)->flag != -42)
+        { 
+    	    if ((*stack_a)->index != data->min)
+        	    pb(stack_a, stack_b);
+            ft_sort_min(stack_a, stack_b, data);
+        }
     }
-    while ((*stack_a)->flag != 0 && (*stack_a)->flag == flag2)
-    { 
-    	if ((*stack_a)->index != data->min)
-        	pb(stack_a, stack_b);
-        ft_sort_min(stack_a, stack_b, data);
+    else if ((*stack_a)->flag != 0)
+    {
+        while ((*stack_a)->flag == flag2)
+        { 
+    	    if ((*stack_a)->index != data->min)
+        	    pb(stack_a, stack_b); 
+            ft_sort_min(stack_a, stack_b, data);
+        }
     }
     if (*stack_b)
     	data->max = ft_find_max(stack_b)->index;
-    data->min = (data->max - data->min) / 2 + data->min;
+    data->mid = (data->max - data->min) / 2 + data->min;
 }
+void start_sorting(t_list **stack_a, t_list **stack_b, t_data *data)
+{
+    int	size;
+	int	i;
 
+	size = ft_lstsize(stack_a);
+	i = 0;
+	
+	while (i < size)
+    {
+		if ((*stack_a)->index <= data->mid)
+			pb(stack_a, stack_b);
+		else
+		{
+			if (ft_lstsize(stack_b) > 1 && (*stack_b)->index < (data->mid / 2))
+				rr(stack_a, stack_b);
+			else
+                ra(stack_a);
+		}
+        i++;
+	} //printf("end\n");
+	data->max = data->mid;
+	data->mid = data->max / 2;
+	data->flag = 1;
+}
 void ft_sort_all(t_list **stack_a, t_list **stack_b, int n)
 {
-    t_data *data;
+    t_data data;
 
-    data = malloc(sizeof(t_data));
-    if (!data)
-        ft_error_handler();
-	data->flag = 0;
-    data->min = ft_find_min(stack_a)->index;
-    data->max = ft_find_max(stack_a)->index;
-    data->mid = data->max / 2 + data->min;
+	data.flag = 0;
+    data.min = ft_find_min(stack_a)->index;
+    data.max = ft_find_max(stack_a)->index;
+    data.mid = data.max / 2;
     
-    int i;
-
-    i = 0;
-    while (i < ft_lstsize(stack_a))
-        {
-        if ((*stack_a)->index <= data->mid)
-            pb(stack_a, stack_b);
-        else
-            {
-            if (ft_lstsize(stack_b) > 1 && (*stack_b)->index < (data->mid/2))
-                rr(stack_a, stack_b);
-            else
-                {
-                    ra(stack_a);
-                }
-        }
-        
-        i++;
-    }
-	//printf("flag1:%d\n", (*stack_a)->flag);
-    data->max = data->mid;
-    data->mid = (data->max - data->min) / 2 + data->min;
-    data->flag++;
-    while(!ft_check_stack(stack_a, n))
+    start_sorting(stack_a, stack_b, &data);
+	
+    while(ft_check_stack(stack_a, n))
     {
-        if(!*stack_b) //if stack b is empty
+        if(!ft_lstsize(stack_b))
         {
-			ft_push_b(stack_a, stack_b, data);
+			ft_push_b(stack_a, stack_b, &data);
         }
-        else //if stack b is not empty
-        {
-            ft_push_a(stack_a, stack_b, data);
+        else
+        { 
+            ft_push_a(stack_a, stack_b, &data);
         }
+	
     }
-
 }
 void ft_sort(t_list **stack_a, t_list **stack_b , int n)
 {
-
     if (n == 2)
         ft_sort_2(stack_a);
     else if (n == 3)
