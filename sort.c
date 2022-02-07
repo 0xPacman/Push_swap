@@ -157,9 +157,7 @@ void ft_push_a(t_list **stack_a, t_list **stack_b, t_data *data)
 
 void ft_push_b(t_list **stack_a, t_list **stack_b, t_data *data)
 {
-	// printf("flag:%d\n", (*stack_a)->flag);
-	// if ((*stack_a)->flag == 2)
-	// 	exit(1);
+	
 	int flag2 = (*stack_a)->flag;
 	while ((*stack_a)->flag == 0 && (*stack_a)->flag != -42)
     { 
@@ -213,8 +211,6 @@ void ft_sort_all(t_list **stack_a, t_list **stack_b, int n)
     data->max = data->mid;
     data->mid = (data->max - data->min) / 2 + data->min;
     data->flag++;
-   // printf("flag2:%d\n", (*stack_a)->flag);
-	
     while(!ft_check_stack(stack_a, n))
     {
         if(!*stack_b) //if stack b is empty

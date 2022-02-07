@@ -65,16 +65,14 @@ int *sort_args(char **str, int n)
     int i;
 
     i = 0;
-    tab = malloc(sizeof(int) * n);
-    if (!tab)
-        ft_error_handler();
+	tab = malloc(sizeof(int) * n);
+     if (!tab)
+         ft_error_handler();
     while(i < n)
     {
-        //printf("atoi:%d\n",ft_atoi(str[i]));
         tab[i] = ft_atoi(str[i]);
         i++;
     }
-    tab[i] = '\0';
     ft_bubble_sort(tab, n);
     return (tab);
 }
@@ -163,7 +161,7 @@ void check_if_sorted(int *sorted, t_list **stack, int n)
 
 int main(int argc, char *argv[])
 {
-    t_data *data = malloc(sizeof(t_data));
+    static t_data data;// = malloc(sizeof(t_data));
     t_list *stack_a;
     t_list *stack_b;
     stack_a = NULL;
@@ -172,19 +170,33 @@ int main(int argc, char *argv[])
 
     if (argc >= 2)
         {
-            data->str = ft_addstr(argv);
-            data->arg = ft_split(data->str, ' ', data);
-            ft_is_duplicate(data->arg);
-            stack_a = stack_creator(data->arg);
-            sorted = sort_args(data->arg, data->count);
-            check_if_sorted(sorted, &stack_a, data->count);
-            ft_get_index(stack_a, sorted, data->count);
+            data.str = ft_addstr(argv);
+            data.arg = ft_split(data.str, ' ', &data);
+            ft_is_duplicate(data.arg);
+            stack_a = stack_creator(data.arg);
+            sorted = sort_args(data.arg, data.count);
+			int i = 0;
+			// printf("%d\n", data.count);
+			// while(i < data.count)
+			// {
+			// 	printf("sorted %d\n", sorted[i]);
+			// 	i++;
+			// }
+			
+            check_if_sorted(sorted, &stack_a, data.count);
+            ft_get_index(stack_a, sorted, data.count);
+			// while(stack_a)
+			// {
+			// 	printf("%d\n", stack_a->index);
+			// 	stack_a = stack_a->next;
+			// }
+			// printf("==========\n");
 			// while(stack_a)
             // {
-            //     printf("-Stack A:[%d] | index %d\n", stack_a->nb, stack_a->index);
+            //     printf("-Stack index:[%d]\n", stack_a->nb);
             //     stack_a = stack_a->next;
             // }
-            ft_sort(&stack_a, &stack_b, data->count);
+            ft_sort(&stack_a, &stack_b, data.count);
            
     //         ft_get_index(stack_a, sorted, data->count);
            // printf("the index: %d\nthe number: %d\n", stack_a->index,stack_a->nb);

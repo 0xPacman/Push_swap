@@ -51,8 +51,8 @@ int ft_find_in_stack(t_list **stack, t_list *to_find)
     lst = *stack;
     while(lst != to_find)
     {
+		i++;
         lst = lst->next;
-        i++;
     }
     return (i);
 }
@@ -64,13 +64,13 @@ int ft_check_stack(t_list **stack, int n)
 
 	size = ft_lstsize(stack);
 	if(n != size)
-		return (0);
+		return (1);
 	lst = *stack;
 	while (lst->next)
 	{
 		if (lst->index > lst->next->index)
-			return (0);
+			return (1);
 		lst = lst->next;
 	}
-	return (1);
+	return (0);
 }
