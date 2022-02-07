@@ -13,24 +13,24 @@
 #include "push_swap.h"
 
 void ft_sort_min(t_list **stack_a, t_list **stack_b, t_data *data)
-{
-    if((*stack_a)->index == data->min)
-    {
-		(*stack_a)->flag = -42;
-		ra(stack_a);
-        data->min++;
+{	
+	while(1)
+	{
+    	if((*stack_a)->index == data->min)
+    	{
+			(*stack_a)->flag = -42;
+			ra(stack_a);
+        	data->min++;
+    	}
+    	else if (ft_lstsize(stack_b) > 0 && (*stack_b)->index == data->min)
+        	pa(stack_a, stack_b);
+    	else if (ft_lstsize(stack_b) > 2 && ft_lstlast(*stack_b)->index == data->min)
+        	rrb(stack_b);
+    	else if ((*stack_a)->next->index == data->min)
+        	sa(stack_a);
+    	else
+        	break ;
     }
-    else if (ft_lstsize(stack_b) > 0 && (*stack_b)->index == data->min)
-        pa(stack_a, stack_b);
-    else if (ft_lstsize(stack_b) > 1 && (*stack_a)->next->index == data->min && ft_lstlast(*stack_a)->index == data->min)
-        ss(stack_a, stack_b);
-    else if (ft_lstsize(stack_b) > 2 && ft_lstlast(*stack_b)->index == data->min)
-         rrb(stack_b);
-    else if ((*stack_a)->next->index == data->min)
-        sa(stack_a);
-    else
-        return ;
-    ft_sort_min(stack_a, stack_b, data);
 }
 
 void ft_push_a(t_list **stack_a, t_list **stack_b, t_data *data)

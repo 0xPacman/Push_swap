@@ -42,7 +42,6 @@ int main(int argc, char *argv[])
             ft_is_duplicate(data.arg);
             stack_a = stack_creator(data.arg);
             sorted = sort_args(data.arg, data.count);
-			int i = 0;
             if (check_if_sorted(sorted, &stack_a, data.count))
                 exit (0);
             ft_get_index(stack_a, sorted, data.count);
