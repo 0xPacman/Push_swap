@@ -12,10 +12,23 @@
 
 #include "push_swap.h"
 
+void ft_sort(t_list **stack_a, t_list **stack_b , int n)
+{
+    if (n == 2)
+        ft_sort_2(stack_a);
+    else if (n == 3)
+        ft_sort_3(stack_a);
+    else if (n == 4)
+        ft_sort_4(stack_a, stack_b);
+	else if (n == 5)
+        ft_sort_5(stack_a, stack_b);
+	else
+    	ft_sort_all(stack_a, stack_b, n);
+}
 
 int main(int argc, char *argv[])
 {
-    static t_data data;// = malloc(sizeof(t_data));
+    static t_data data;
     t_list *stack_a;
     t_list *stack_b;
     stack_a = NULL;
