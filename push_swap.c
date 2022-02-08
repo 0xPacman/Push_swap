@@ -33,7 +33,6 @@ int main(int argc, char *argv[])
     t_list *stack_b;
     stack_a = NULL;
     stack_b = NULL;
-    int *sorted;
 
     if (argc >= 2)
         {
@@ -41,10 +40,10 @@ int main(int argc, char *argv[])
             data.arg = ft_split(data.str, ' ', &data);
             ft_is_duplicate(data.arg);
             stack_a = stack_creator(data.arg);
-            sorted = sort_args(data.arg, data.count);
-            if (check_if_sorted(sorted, &stack_a, data.count))
+            data.sorted = sort_args(data.arg, data.count);
+            if (check_if_sorted(data.sorted, &stack_a, data.count))
                 exit (0);
-            ft_get_index(stack_a, sorted, data.count);
+            ft_get_index(stack_a, data.sorted, data.count);
             ft_sort(&stack_a, &stack_b, data.count);
         }
     exit(1);

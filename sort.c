@@ -84,6 +84,7 @@ void ft_push_b(t_list **stack_a, t_list **stack_b, t_data *data)
     	data->max = ft_find_max(stack_b)->index;
     data->mid = (data->max - data->min) / 2 + data->min;
 }
+
 void start_sorting(t_list **stack_a, t_list **stack_b, t_data *data)
 {
     int	size;
@@ -106,16 +107,18 @@ void start_sorting(t_list **stack_a, t_list **stack_b, t_data *data)
 	}
 	data->max = data->mid;
 	data->mid = data->max / 2;
-	data->flag = 1;
 }
+
 void ft_sort_all(t_list **stack_a, t_list **stack_b, int n)
 {
     t_data data;
 
-	data.flag = 0;
+	
     data.min = ft_find_min(stack_a)->index;
     data.max = ft_find_max(stack_a)->index;
     data.mid = data.max / 2;
+	data.flag = 1;
+	(*stack_a)->flag = 0;
     start_sorting(stack_a, stack_b, &data);
     while(ft_check_stack(stack_a, n))
     {
