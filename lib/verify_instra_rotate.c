@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   instra_rotate.c                                    :+:      :+:    :+:   */
+/*   verify_instra_rotate.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ahjadani <ahjadani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/08 16:16:20 by ahjadani          #+#    #+#             */
-/*   Updated: 2022/02/08 16:17:39 by ahjadani         ###   ########.fr       */
+/*   Created: 2022/02/08 16:24:17 by ahjadani          #+#    #+#             */
+/*   Updated: 2022/02/08 16:24:57 by ahjadani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../push_swap.h"
 
-void	ra(t_list **stack)
+void	verify_ra(t_list **stack)
 {
 	t_list	*temp;
 
@@ -22,11 +22,10 @@ void	ra(t_list **stack)
 		*stack = temp->next;
 		temp->next = NULL;
 		ft_lstadd_back(stack, temp);
-		write(1, "ra\n", 3);
 	}
 }
 
-void	rb(t_list **stack)
+void	verify_rb(t_list **stack)
 {
 	t_list	*temp;
 
@@ -36,11 +35,10 @@ void	rb(t_list **stack)
 		*stack = temp->next;
 		temp->next = NULL;
 		ft_lstadd_back(stack, temp);
-		write(1, "rb\n", 3);
 	}
 }
 
-void	rr(t_list **stack_a, t_list **stack_b)
+void	verify_rr(t_list **stack_a, t_list **stack_b)
 {
 	t_list	*temp;
 
@@ -58,5 +56,4 @@ void	rr(t_list **stack_a, t_list **stack_b)
 		temp->next = NULL;
 		ft_lstadd_back(stack_b, temp);
 	}
-	write(1, "rr\n", 3);
 }

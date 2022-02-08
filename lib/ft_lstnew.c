@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lstnew.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ahjadani <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: ahjadani <ahjadani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/11 21:36:05 by ahjadani          #+#    #+#             */
-/*   Updated: 2021/11/12 13:54:46 by ahjadani         ###   ########.fr       */
+/*   Updated: 2022/02/08 16:48:58 by ahjadani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,11 @@ t_list	*ft_lstnew(int nb)
 	if (!new)
 		return (NULL);
 	else
-	 {
-		 //printf("nb:%d\n", nb);
-		 new->nb = nb;
-		 new->index = 0;
-		 new->flag = 0;
-		 new->next = NULL;
-		 //new->prev = NULL;
-	 }
+	{
+		new->nb = nb;
+		new->index = 0;
+		new->flag = 0;
+		new->next = NULL;
+	}
 	return (new);
 }

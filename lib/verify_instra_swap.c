@@ -1,62 +1,59 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   instra_rotate.c                                    :+:      :+:    :+:   */
+/*   verify_instra_swap.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ahjadani <ahjadani@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ahjadani <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/08 16:16:20 by ahjadani          #+#    #+#             */
-/*   Updated: 2022/02/08 16:17:39 by ahjadani         ###   ########.fr       */
+/*   Created: 2022/02/08 15:30:20 by ahjadani          #+#    #+#             */
+/*   Updated: 2022/02/08 15:30:37 by ahjadani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../push_swap.h"
 
-void	ra(t_list **stack)
+void	verify_sa(t_list **stack)
 {
 	t_list	*temp;
 
 	if ((*stack) && (*stack)->next)
 	{
 		temp = *stack;
-		*stack = temp->next;
-		temp->next = NULL;
-		ft_lstadd_back(stack, temp);
-		write(1, "ra\n", 3);
+		*stack = (*stack)->next;
+		temp->next = (*stack)->next;
+		(*stack)->next = temp;
 	}
 }
 
-void	rb(t_list **stack)
+void	verify_sb(t_list **stack)
 {
 	t_list	*temp;
 
 	if ((*stack) && (*stack)->next)
 	{
 		temp = *stack;
-		*stack = temp->next;
-		temp->next = NULL;
-		ft_lstadd_back(stack, temp);
-		write(1, "rb\n", 3);
+		*stack = (*stack)->next;
+		temp->next = (*stack)->next;
+		(*stack)->next = temp;
 	}
 }
 
-void	rr(t_list **stack_a, t_list **stack_b)
+void	verify_ss(t_list **stack_a, t_list **stack_b)
 {
 	t_list	*temp;
 
 	if ((*stack_a) && (*stack_a)->next)
 	{
 		temp = *stack_a;
-		*stack_a = temp->next;
-		temp->next = NULL;
-		ft_lstadd_back(stack_a, temp);
+		*stack_a = (*stack_a)->next;
+		temp->next = (*stack_a)->next;
+		(*stack_a)->next = temp;
 	}
 	if ((*stack_b) && (*stack_b)->next)
 	{
 		temp = *stack_b;
-		*stack_b = temp->next;
-		temp->next = NULL;
-		ft_lstadd_back(stack_b, temp);
+		*stack_b = (*stack_b)->next;
+		temp->next = (*stack_b)->next;
+		(*stack_b)->next = temp;
 	}
-	write(1, "rr\n", 3);
 }

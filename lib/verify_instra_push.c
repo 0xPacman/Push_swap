@@ -1,40 +1,43 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*   verify_instra_push.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ahjadani <ahjadani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/07 18:33:10 by ahjadani          #+#    #+#             */
-/*   Updated: 2022/02/08 16:52:56 by ahjadani         ###   ########.fr       */
+/*   Created: 2022/02/08 16:22:08 by ahjadani          #+#    #+#             */
+/*   Updated: 2022/02/08 16:22:41 by ahjadani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../push_swap.h"
 
-int	ft_atoi(const char *str)
+void	verify_pb(t_list **stack_a, t_list **stack_b)
 {
-	long		sum;
-	long		sign;
-	long		i;
+	t_list	*temp;
+	t_list	*first;
 
-	sum = 0;
-	sign = 1;
-	i = 0;
-	while (ft_isspace(str[i]))
-		i++;
-	if (str[i] == '+' || str[i] == '-')
+	if (*stack_a)
 	{
-		if (str[i] == '-')
-			sign = -1;
-		i++;
+		temp = (*stack_a)->next;
+		first = *stack_a;
+		first->next = NULL;
+		ft_lstadd_front(stack_b, first);
+		*stack_a = temp;
 	}
-	while (ft_isdigit(str[i]))
+}
+
+void	verify_pa(t_list **stack_a, t_list **stack_b)
+{
+	t_list	*temp;
+	t_list	*first;
+
+	if (*stack_b)
 	{
-		sum = sum * 10 + str[i] - 48;
-		i++;
+		temp = (*stack_b)->next;
+		first = *stack_b;
+		first->next = NULL;
+		ft_lstadd_front(stack_a, first);
+		*stack_b = temp;
 	}
-	if ((sum * sign) > 2147483647 || ((sum * sign) < -2147483648))
-		ft_error_handler();
-	return (sum * sign);
 }
