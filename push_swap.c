@@ -6,7 +6,7 @@
 /*   By: ahjadani <ahjadani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/17 14:08:40 by ahjadani          #+#    #+#             */
-/*   Updated: 2022/02/08 16:33:50 by ahjadani         ###   ########.fr       */
+/*   Updated: 2022/02/08 19:39:10 by ahjadani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,8 @@ int	main(int argc, char *argv[])
 			exit (0);
 		ft_get_index(stack_a, data.sorted, data.count);
 		ft_sort(&stack_a, &stack_b, data.count);
+		ft_free(&data);
+		exit(0);
 	}
 	exit(1);
 }

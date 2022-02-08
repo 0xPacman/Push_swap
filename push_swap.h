@@ -6,7 +6,7 @@
 /*   By: ahjadani <ahjadani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/08 16:34:41 by ahjadani          #+#    #+#             */
-/*   Updated: 2022/02/08 16:41:48 by ahjadani         ###   ########.fr       */
+/*   Updated: 2022/02/08 19:38:45 by ahjadani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,5 +98,7 @@ void	verify_rrb(t_list **stack);
 void	verify_rrr(t_list **stack_a, t_list **stack_b);
 void	verify_pb(t_list **stack_a, t_list **stack_b);
 void	verify_pa(t_list **stack_a, t_list **stack_b);
+
+void	ft_free(t_data *data);
 
 #endif

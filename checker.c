@@ -6,7 +6,7 @@
 /*   By: ahjadani <ahjadani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/08 16:25:12 by ahjadani          #+#    #+#             */
-/*   Updated: 2022/02/08 16:30:17 by ahjadani         ###   ########.fr       */
+/*   Updated: 2022/02/08 19:40:41 by ahjadani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,6 @@ int	main(int argc, char **argv)
 	t_list			*stack_a;
 	t_list			*stack_b;
 	char			*read;
-	int				*sorted;
 
 	if (argc >= 2)
 	{
@@ -55,16 +54,18 @@ int	main(int argc, char **argv)
 		data.arg = ft_split(data.str, ' ', &data);
 		ft_is_duplicate(data.arg);
 		stack_a = stack_creator(data.arg);
-		sorted = sort_args(data.arg, data.count);
+		data.sorted = sort_args(data.arg, data.count);
 		read = get_next_line(0);
 		while (read != NULL)
 		{
 			ft_check_instra(&stack_a, &stack_b, read);
+			free(read);
 			read = get_next_line(0);
 		}
-		if (check_if_sorted(sorted, &stack_a, data.count))
+		if (check_if_sorted(data.sorted, &stack_a, data.count))
 			write(1, "OK\n", 3);
 		else
 			write(1, "KO\n", 3);
+		ft_free(&data);
 	}
 }
