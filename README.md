@@ -1,6 +1,6 @@
 
 <p align="center">
-  <img src="https://github.com/0xPacman/Push_swap/blob/main/pushswap.png" width="50%" height="50%" alt="Push Swap logo">
+  <img src="https://github.com/0xPacman/Push_swap/blob/main/pushswap.png" width="70%" height="70%" alt="Push Swap logo">
 </p>
 
 # Push swap
