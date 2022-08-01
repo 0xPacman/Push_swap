@@ -16,7 +16,6 @@ void	swap(int *x, int *y)
 {
 	int	temp;
 
-	temp = 0;
 	temp = *x;
 	*x = *y;
 	*y = temp;
